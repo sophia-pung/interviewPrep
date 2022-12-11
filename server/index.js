@@ -10,29 +10,32 @@ app.use(cors());
 
 app.listen(PORT, () => console.log(`Hola! Server is running on port ${PORT}`));
 
-app.get("/weather", (req, res) => {
-    console.log("HERE")
-    const city = req.query.cityName;
-    const apiKey = process.env.API_KEY;
-    const params = new URLSearchParams({
-    //adding these things to where params is in URL, orders it how it needs to itself
-        q: 'Berkeley',
-        lat: '37.8715',
-        lon: '-122.27',
-        appid: process.env.API_KEY,
-        units: "imperial",
-      });
-    let API_KEY = process.env.API_KEY;
-    const url = `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=44.34&lon=10.99&appid=${API_KEY}`;
-    console.log(url);
+app.get("/zip", (req, res) => {
+  let API_KEY = process.env.API_KEY;
+    const url = `http://api.openweathermap.org/geo/1.0/zip?zip=94704,US&appid=${API_KEY}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log("RES", res);
-        //create an object with key called data, and value called data > can use spread operator res.send(data)
+        console.log("ZIP DATA", zipdata)
+        res.send({ ...zipdata });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+})
+
+app.get("/weather", (req, res) => {
+    console.log("zip", zip);
+    let API_KEY = process.env.API_KEY;
+    const url = `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=122.27&lon=37.87&appid=${API_KEY}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("DATA", data)
         res.send({ ...data });
       })
       .catch((err) => {
         console.log(err);
       });
   });
+
