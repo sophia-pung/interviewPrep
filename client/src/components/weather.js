@@ -7,12 +7,14 @@ function LoadWeather() {
         .then((response) => response.json())
         .then((weather) => {
           setAverageTemp(weather);
+          console.log(averageTemp)
         });
     }
     const tempInFarenheight = (averageTemp) => {averageTemp.list.map((weather) => {
       console.log("test")
       return 1.8*(weather.main.feels_like-273) + 32;
     })};
+    console.log("AT", tempInFarenheight(averageTemp));
     function checkBelowForty(temp) {
       return temp < 40; 
     };
