@@ -25,6 +25,7 @@ app.get("/zip", (req, res) => {
 })
 
 app.get("/weather", (req, res) => {
+    const zip = req.query.zip;
     console.log("zip", zip);
     let API_KEY = process.env.API_KEY;
     const url = `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=122.27&lon=37.87&appid=${API_KEY}`;

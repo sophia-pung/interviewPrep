@@ -29,6 +29,8 @@ function LoadWeather() {
     console.log(tempInFarenheight)
     }
 
+    console.log(fetchZip())
+
     return  (
         <button onClick={fetchWeather}>test</button>
     )
